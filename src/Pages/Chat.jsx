@@ -5,10 +5,10 @@ function Chat(props)
 {
     return(
         <div>
-            <div style={{width: '20%', display: "inline-block"}}>
+            <div style={{width: '25%', display: "inline-block"}}>
                 <ChatList />
             </div>
-            <div style={{width: '80%', display: 'inline-block'}}>
+            <div style={{width: '75%', display: 'inline-block'}}>
                 <Outlet/>
             </div>
         </div>

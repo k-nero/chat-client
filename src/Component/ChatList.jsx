@@ -38,16 +38,14 @@ function ChatList()
     return(
         <div className="chat-list" style={{ height:'100vh', borderRight: '1px solid #d9d9d9', marginRight: '0px'}}>
             <List dataSource={chatList}
-                  header={<div>Chats</div>}
                   bordered={true}
                   loading={isLoading}
                   rowKey={item => item._id}
                   renderItem={item => (
-                <List.Item style={{paddingLeft: '60px ', paddingTop: 0}} onClick={(e) => {
-                    console.log(item._id)
+                <List.Item style={{paddingLeft: '60px '}} onClick={(e) => {
                     getMessageList(item._id).then();
                 }}>
-                        <List.Item.Meta title={item.chatName} description={item?.lastMessage ? item.lastMessage.content : "No message yet"} avatar={<Avatar style={{marginTop: '24px'}} src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"  size="large"/>} />
+                        <List.Item.Meta title={item.chatName} description={item?.lastMessage ? item.lastMessage.content : "No message yet"} avatar={<Avatar style={{}} src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"  size={70}/>} />
                 </List.Item>
             )}
             />
