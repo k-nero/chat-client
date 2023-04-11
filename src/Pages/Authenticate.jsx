@@ -1,4 +1,4 @@
-import {Button, Carousel, Checkbox, Form, Input} from "antd";
+import {Alert, Button, Carousel, Checkbox, Form, Input} from "antd";
 import React, {useState} from "react";
 import logo from "./Auth/img.png"
 import img1 from "./Auth/image1.png";
@@ -9,6 +9,7 @@ function Authenticate(props)
     let controller = new AbortController();
 
     const [loading, setLoading] = useState(false);
+    const [validateStatus, setValidateStatus] = useState('');
     const styles = {
         main:{
             display: 'flex',
@@ -60,7 +61,12 @@ function Authenticate(props)
             clearTimeout(id);
             if (response.ok) {
                const data = await response.json();
-               props.setToken(data.data);
+               await props.setToken(data.data);
+            }
+            else
+            {
+                const res = await response.json();
+                setValidateStatus(res.message);
             }
             setLoading(false);
         }
@@ -86,6 +92,7 @@ function Authenticate(props)
                         <h1 style={{ fontSize: '1.5rem', letterSpacing: '-0.5px', color: '#151111'}}>Logo</h1>
                     </div>
                     <h2 style={{textAlign: "center", fontSize: "2.1rem", fontWeight:'600'}}>Welcome Back</h2>
+                    {validateStatus ? <Alert message={validateStatus} type="error" style={{margin: "0 48px 0 48px"}} /> : null}
                     <Form
                         name="login"
                         initialValues={{remember: true,}}
@@ -143,7 +150,6 @@ function Authenticate(props)
                         </div>
                     </Carousel>
                 </div>
-
             </div>
         </div>
     );
