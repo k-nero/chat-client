@@ -4,10 +4,11 @@ import logo from "./Auth/img.png"
 import img1 from "./Auth/image1.png";
 import img2 from "./Auth/image2.png";
 import img3 from "./Auth/image3.png";
+import {useNavigate} from "react-router-dom";
 function Authenticate(props)
 {
     let controller = new AbortController();
-
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [validateStatus, setValidateStatus] = useState('');
     const styles = {
@@ -62,6 +63,7 @@ function Authenticate(props)
             if (response.ok) {
                const data = await response.json();
                await props.setToken(data.data);
+               navigate('/chat');
             }
             else
             {

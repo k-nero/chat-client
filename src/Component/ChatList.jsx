@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {Avatar, List} from "antd";
+import {Avatar, Input, List} from "antd";
 import useToken from "../Utils/useToken";
 import {useNavigate} from "react-router-dom";
 
@@ -40,15 +40,18 @@ function ChatList()
             <List dataSource={chatList}
                   bordered={true}
                   loading={isLoading}
+                  header={<div>
+
+                      <Input placeholder="Search" style={{width: '80%', borderRadius: '50px'}} />
+                  </div>}
                   rowKey={item => item._id}
                   renderItem={item => (
-                <List.Item style={{paddingLeft: '60px '}} onClick={(e) => {
-                    getMessageList(item._id).then();
-                }}>
-                        <List.Item.Meta title={item.chatName} description={item?.lastMessage ? item.lastMessage.content : "No message yet"} avatar={<Avatar style={{}} src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"  size={70}/>} />
+                <List.Item style={{paddingLeft: '30px'}} onClick={() => {getMessageList(item._id).then()}}>
+                        <List.Item.Meta title={item.chatName}
+                                        description={item?.lastMessage ? item.lastMessage.content : "No message yet"}
+                                        avatar={<Avatar style={{}} src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg" size={70}/>} />
                 </List.Item>
-            )}
-            />
+            )}/>
         </div>
     );
 }
