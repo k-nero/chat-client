@@ -16,7 +16,7 @@ function App()
         },
       }}
   >
-    <div className="App" style={{height:"100vh"}}>
+    <div className="App" style={{height:"100vh", overflow:"hidden"}}>
       {contextHolder}
       {!token ? <Authenticate messageApi={messageApi} setToken={setToken} /> : <Outlet />}
     </div>

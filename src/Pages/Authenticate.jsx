@@ -39,6 +39,8 @@ function Authenticate(props)
             borderRadius: '0px',
             padding: '0.3rem 0rem 0.3rem 0rem',
             fontSize: '0.95rem',
+            fontWeight: '500',
+            boxShadow: 'none',
         }
     }
 
