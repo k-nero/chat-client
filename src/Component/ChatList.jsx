@@ -46,9 +46,9 @@ function ChatList(props)
                   rowKey={item => item._id}
                   renderItem={item => (
                 <List.Item style={{paddingLeft: '30px'}} onClick={() => {getMessageList(item._id).then()}}>
-                        <List.Item.Meta title={item.chatName}
+                        <List.Item.Meta title={item?.chatName ? item.chatName : item.members[0].fullName}
                                         description={item?.lastMessage ? item.lastMessage.content : "No message yet"}
-                                        avatar={<Avatar style={{}} src={`https://localhost:5000/api/media/get-media/?path=${item?.chatAvatar}`} size={70}/>} />
+                                        avatar={<Avatar style={{}} src={`https://localhost:5000/api/media/get-media/?path=${item?.chatAvatar ? item.chatAvatar : item.members[0].pic}`} size={70}/>} />
                 </List.Item>
             )}/>
         </div>

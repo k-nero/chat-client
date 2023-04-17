@@ -39,8 +39,7 @@ function ChatBody(props)
                 setMessages([...messages, data]);
             });
             messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-    , [messages, props.socket]);
+    }, [props.socket]);
 
     return (
         <div className="chat-body" style={{}}>
