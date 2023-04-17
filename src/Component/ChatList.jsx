@@ -42,12 +42,18 @@ function ChatList(props)
                   bordered={true}
                   loading={isLoading}
                   header={<ChatListHeader userInfo={props.userInfo} setUserinfo={props.setUserInfo}/>}
-                  rowKey={item => item._id}
+                  rowKey={ item => item._id }
                   renderItem={item => (
                 <List.Item style={{paddingLeft: '30px'}} onClick={() => { getMessageList(item._id).then() }}>
                         <List.Item.Meta title={item?.chatName ? item.chatName : item.members[0].fullName}
-                                        description={item?.lastMessage ? item.lastMessage.content : "No message yet"}
-                                        avatar={<Avatar style={{}} src={`https://localhost:5000/api/media/get-media/?path=${item?.chatAvatar ? item.chatAvatar : item.members[0].pic}`} size={70}/>} />
+                                        description={(
+                                            <div>
+                                                <Avatar src={`https://localhost:5000/api/media/get-media/?path=${item?.lastMessage.sender.pic}`} size={20}/>
+                                                <span style={{marginLeft: '10px'}}>{item?.lastMessage ? item.lastMessage.content : "No message yet"}</span>
+                                                <span style={{float: 'right'}}>{new Date(item?.lastMessage ? item.lastMessage.createdAt : "").toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})}</span>
+                                            </div>
+                                        )}
+                                        avatar={<Avatar src={`https://localhost:5000/api/media/get-media/?path=${item?.chatAvatar ? item.chatAvatar : item.members[0].pic}`} size={70}/>} />
                 </List.Item>
             )}/>
         </div>
