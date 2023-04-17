@@ -2,12 +2,11 @@ import Message from "./Message";
 import {Avatar} from "antd";
 import ChatInput from "./ChatInput";
 import useToken from "../Utils/useToken";
-import {createRef, useEffect, useState} from "react";
+import {createRef, useEffect} from "react";
 
 function ChatBody(props)
 {
     const {token} = useToken();
-    const [messages, setMessages] = useState([]);
     const messagesEndRef = createRef()
 
     async function getMessages()
@@ -23,23 +22,18 @@ function ChatBody(props)
         const data = await res.json();
         if(data)
         {
-            setMessages(data.data);
-            console.log(data.data);
+            props.setMessages(data.data);
         }
     }
 
     useEffect(() => {
         getMessages().then();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.chatId]);
+    }, [props.chatId])
+
 
     useEffect(() => {
-            props.socket.on('message', (data) => {
-                console.log(data);
-                setMessages([...messages, data]);
-            });
-            messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }, [props.socket]);
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'});
+    }, [ messagesEndRef]);
 
     return (
         <div className="chat-body" style={{}}>
@@ -48,8 +42,8 @@ function ChatBody(props)
                     <h3 style={{margin: 0}}>{props.chatName}</h3>
                     <p style={{ fontSize: '0.7rem', fontWeight: '400' }} >You and {props.chatName} are connect <br/>start sending message now </p>
                 </div>
-                {messages.map((message) => (
-                    <Message userInfor={props.userInfor} key={message._id} message={message}/>
+                {props.messages.map((message) => (
+                    <Message userInfo={props.userInfo} key={message._id} message={message}/>
                 ))}
                 <div ref={messagesEndRef}/>
             </div>

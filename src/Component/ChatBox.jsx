@@ -1,7 +1,6 @@
 import {useOutletContext, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import useToken from "../Utils/useToken";
-import {Avatar, Button} from "antd";
 import ChatBody from "./ChatBody";
 import ChatHeader from "./ChatHeader";
 
@@ -9,7 +8,7 @@ function ChatBox(props)
 {
     const {chatId} = useParams();
     const {token} = useToken();
-    const [userInfor, socket] = useOutletContext()
+    const [userInfo, socket, messages, setMessages] = useOutletContext()
     const [chatInfo, setChatInfo] = useState();
     async function getChatInfo()
     {
@@ -36,7 +35,7 @@ function ChatBox(props)
     return (
             (<div className="chatbox" style={{display: "inline-block", width: '100%', }}>
                 <ChatHeader chatInfo={chatInfo}/>
-                <ChatBody userInfor={userInfor} socket={socket} chatId={chatId} chatAvatar={`https://localhost:5000/api/media/get-media/?path=${chatInfo?.chatAvatar ? chatInfo?.chatAvatar : chatInfo?.members[0].pic}`} chatName={chatInfo?.chatName ? chatInfo?.chatName : chatInfo?.members[0].fullName} />
+                <ChatBody messages={messages} setMessages={setMessages} userInfo={userInfo} socket={socket} chatId={chatId} chatAvatar={`https://localhost:5000/api/media/get-media/?path=${chatInfo?.chatAvatar ? chatInfo?.chatAvatar : chatInfo?.members[0].pic}`} chatName={chatInfo?.chatName ? chatInfo?.chatName : chatInfo?.members[0].fullName} />
             </div>)
     );
 }

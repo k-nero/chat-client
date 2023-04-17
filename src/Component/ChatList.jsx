@@ -4,13 +4,12 @@ import useToken from "../Utils/useToken";
 import {useNavigate} from "react-router-dom";
 import ChatListHeader from "./ChatListHeader";
 
-
 function ChatList(props)
 {
-    const [chatList, setChatList] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const {token} = useToken();
     const navigate = useNavigate();
+
     async function getChatList()
     {
         setIsLoading(true)
@@ -24,7 +23,7 @@ function ChatList(props)
         const data = await response.json();
         if(data)
         {
-            setChatList(data);
+            props.setChatList(data);
             setIsLoading(false);
         }
         return data;
@@ -39,13 +38,13 @@ function ChatList(props)
 
     return(
         <div className="chat-list" style={{ height:'100vh', borderRight: '1px solid #d9d9d9', marginRight: '0px'}}>
-            <List dataSource={chatList}
+            <List dataSource={props.chatList}
                   bordered={true}
                   loading={isLoading}
-                  header={<ChatListHeader userInfor={props.userInfor} setUserinfor={props.setUserInfor}/>}
+                  header={<ChatListHeader userInfo={props.userInfo} setUserinfo={props.setUserInfo}/>}
                   rowKey={item => item._id}
                   renderItem={item => (
-                <List.Item style={{paddingLeft: '30px'}} onClick={() => {getMessageList(item._id).then()}}>
+                <List.Item style={{paddingLeft: '30px'}} onClick={() => { getMessageList(item._id).then() }}>
                         <List.Item.Meta title={item?.chatName ? item.chatName : item.members[0].fullName}
                                         description={item?.lastMessage ? item.lastMessage.content : "No message yet"}
                                         avatar={<Avatar style={{}} src={`https://localhost:5000/api/media/get-media/?path=${item?.chatAvatar ? item.chatAvatar : item.members[0].pic}`} size={70}/>} />

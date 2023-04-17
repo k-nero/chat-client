@@ -17,7 +17,7 @@ function ChatListHeader(props)
         const data = await res.json();
         if(data)
         {
-            props.setUserinfor(data);
+            props.setUserinfo(data);
         }
     }
 
@@ -72,7 +72,7 @@ function ChatListHeader(props)
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a onClick={(e) => e.preventDefault()}>
                     <Space>
-                        <Avatar style={{marginRight: '30px', marginTop:'0px'}} src={`https://localhost:5000/api/media/get-media/?path=${props.userInfor?.pic}`} size={50}/>
+                        <Avatar style={{marginRight: '30px', marginTop:'0px'}} src={`https://localhost:5000/api/media/get-media/?path=${props.userInfo?.pic}`} size={50}/>
                     </Space>
                 </a>
             </Dropdown>
