@@ -1,6 +1,7 @@
-import {Avatar, Dropdown, Input, Space} from "antd";
+import {Avatar, Dropdown, Space} from "antd";
 import useToken from "../Utils/useToken";
 import {useEffect} from "react";
+import SearchBar from "./SearchBar";
 
 function ChatListHeader(props)
 {
@@ -76,7 +77,7 @@ function ChatListHeader(props)
                     </Space>
                 </a>
             </Dropdown>
-            <Input placeholder="Search" style={{width: '70%', borderRadius: '50px'}} />
+            <SearchBar/>
         </div>
     );
 }
