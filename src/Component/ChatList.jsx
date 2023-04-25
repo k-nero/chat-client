@@ -44,11 +44,11 @@ function ChatList(props)
                   header={<ChatListHeader userInfo={props.userInfo} setUserinfo={props.setUserInfo}/>}
                   rowKey={ item => item._id }
                   renderItem={item => (
-                <List.Item style={{paddingLeft: '30px'}} onClick={() => { getMessageList(item._id).then() }}>
+                <List.Item style={{paddingLeft: '30px'}} onClick={() => { getMessageList(item?._id).then() }}>
                         <List.Item.Meta title={item?.chatName ? item.chatName : item.members[0].fullName}
                                         description={(
                                             <div>
-                                                <Avatar src={`https://localhost:5000/api/media/get-media/?path=${item?.lastMessage.sender.pic}`} size={20}/>
+                                                <Avatar src={`https://localhost:5000/api/media/get-media/?path=${item?.lastMessage?.sender?.pic}`} size={20}/>
                                                 <span style={{marginLeft: '10px'}}>{item?.lastMessage ? item.lastMessage.content : "No message yet"}</span>
                                                 <span style={{float: 'right'}}>{new Date(item?.lastMessage ? item.lastMessage.createdAt : "").toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})}</span>
                                             </div>

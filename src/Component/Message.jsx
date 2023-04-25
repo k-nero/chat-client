@@ -2,7 +2,7 @@ import {Avatar} from "antd";
 
 function Message(props)
 {
-   let position =  props.message.sender._id === props.userInfo._id ? 'right' : 'left';
+   let position =  props.message?.sender._id === props.userInfo._id ? 'right' : 'left';
 
     const message = props.message;
     const time = new Date(message.createdAt).toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'});
