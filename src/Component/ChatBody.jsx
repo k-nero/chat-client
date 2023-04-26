@@ -2,12 +2,16 @@ import Message from "./Message";
 import {Avatar} from "antd";
 import ChatInput from "./ChatInput";
 import useToken from "../Utils/useToken";
-import {createRef, useEffect} from "react";
+import {createRef, useEffect, useState} from "react";
 
 function ChatBody(props)
 {
     const {token} = useToken();
     const messagesEndRef = createRef()
+    const [isTyping, setIsTyping] = useState({
+        fullName: '',
+        isTyping: false,
+    });
 
     async function getMessages()
     {
@@ -37,6 +41,27 @@ function ChatBody(props)
         getMessages().then();
     }, [props.chatId])
 
+    useEffect(() => {
+        props.socket.on('typing', (data) => {
+            if(data.chatId === props.chatId)
+            {
+                setIsTyping({fullName: data.fullName, isTyping: true});
+                console.log(data);
+            }
+        });
+        props.socket.on('stop-typing', (data) => {
+            if(data.chatId === props.chatId)
+            {
+                setIsTyping({fullName: data.fullName, isTyping: false});
+                console.log(data);
+            }
+        });
+        return () => {
+            props.socket.off('typing');
+            props.socket.off('stop-typing');
+        }
+    }
+    , [props.socket, props.chatId]);
 
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth'});
@@ -53,8 +78,11 @@ function ChatBody(props)
                     <Message userInfo={props.userInfo} key={message._id} message={message}/>
                 ))}
                 <div ref={ messagesEndRef }/>
+                {isTyping.isTyping === true ? <div style={{width: '100%', textAlign:'left'}}><p style={{ fontSize: '0.7rem', fontWeight: '400' }} >Someone is typing...</p></div> : null}
             </div>
-            <div style={{}}><ChatInput socket={props.socket} chatId={props.chatId} /></div>
+            <div>
+                <ChatInput socket={props.socket} chatId={props.chatId} userInfo={props.userInfo} />
+            </div>
         </div>
     );
 }

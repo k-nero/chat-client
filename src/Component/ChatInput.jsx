@@ -5,8 +5,10 @@ import useToken from "../Utils/useToken";
 function ChatInput(props)
 {
     const [message, setMessage] = useState('');
-    //const [isTyping, setIsTyping] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
     const {token} = useToken();
+    const [timer, setTimer] = useState({})
+
     async function sendMessage()
     {
        try
@@ -33,17 +35,20 @@ function ChatInput(props)
        }
     }
 
+
     function handleChange(e)
     {
         setMessage(e.target.value);
-        if(e.target.value !== '')
+        if(isTyping === false && e.target.value !== '')
         {
-            //setIsTyping(true);
+            setIsTyping(true);
+            props.socket.emit('typing', {chatId: props.chatId, fullName: props.userInfo.fullName});
         }
-        else
-        {
-            //setIsTyping(false);
-        }
+        clearTimeout(timer);
+        setTimer(setTimeout(() => {
+            setIsTyping(false);
+            props.socket.emit('stop-typing', {chatId: props.chatId, fullName: props.userInfo.fullName});
+        }, 3000));
     }
 
     function handleSubmit(e)
@@ -53,7 +58,7 @@ function ChatInput(props)
         {
             sendMessage().then();
             setMessage('');
-            //setIsTyping(false);
+            setIsTyping(false);
         }
     }
 
