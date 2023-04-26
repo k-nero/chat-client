@@ -8,7 +8,7 @@ import Chat from "./Pages/Chat";
 import ChatBox from "./Component/ChatBox";
 import io from "socket.io-client";
 
-const socket = io('http://localhost:5001', {transports: ['websocket']});
+const socket = io('https://localhost:5001', {transports: ['websocket']});
 
 const router = createBrowserRouter([
     {

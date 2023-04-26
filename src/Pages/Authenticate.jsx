@@ -52,7 +52,7 @@ function Authenticate(props)
             const id = setTimeout(() => {
                 props.messageApi.open({type: "error", content:"Request timed out"});
                 return controller.abort();
-                }, 10000);
+                }, 5000);
             const response = await fetch('https://localhost:5000/api/auth/login', {
                 method: 'POST',
                 headers: {
@@ -77,7 +77,7 @@ function Authenticate(props)
         catch (e)
         {
             console.log(e);
-            props.messageApi.open({type: "error", content:"Network error or server is not down"});
+            props.messageApi.open({type: "error", content:"Network error or server is down"});
             setLoading(false);
         }
     }
@@ -129,7 +129,7 @@ function Authenticate(props)
                             <Input.Password placeholder="Password" autoComplete="on" style={styles.input}/>
                         </Form.Item>
 
-                        <Form.Item name="remember" valuePropName="checked">
+                        <Form.Item name="remember" valuePropName="unchecked">
                             <Checkbox>Remember me</Checkbox>
                         </Form.Item>
 

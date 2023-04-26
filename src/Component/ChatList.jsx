@@ -10,6 +10,16 @@ function ChatList(props)
     const {token} = useToken();
     const navigate = useNavigate();
 
+    useEffect(() => {
+        props.socket.on('new-chat', (socket) => {
+            console.log(socket);
+            getChatList().then((data) => {
+                data.map((chat) => props.socket.emit('join', {room: chat._id}));
+            });
+        });
+        return () => { props.socket.off('new-chat') }
+    }, [props.socket]);
+
     async function getChatList()
     {
         setIsLoading(true)

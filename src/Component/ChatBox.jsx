@@ -13,23 +13,30 @@ function ChatBox()
     const [chatInfo, setChatInfo] = useState();
     async function getChatInfo()
     {
-        const res = await fetch('https://localhost:5000/api/chat/get-chat/' + chatId, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token,
-            }
-        });
+       try
+       {
+           const res = await fetch('https://localhost:5000/api/chat/get-chat/' + chatId, {
+               method: 'GET',
+               headers: {
+                   'Content-Type': 'application/json',
+                   'Authorization': 'Bearer ' + token,
+               }
+           });
 
-        const data = await res.json();
-        if(res.status === 404)
-        {
-            setChatInfo(undefined);
-        }
-        else if(res.status === 200)
-        {
-            setChatInfo(data.data)
-        }
+           const data = await res.json();
+           if(res.status === 404)
+           {
+               setChatInfo(undefined);
+           }
+           else if(res.status === 200)
+           {
+               setChatInfo(data.data)
+           }
+       }
+       catch (e)
+       {
+           console.log(e);
+       }
     }
 
     useEffect(() => {

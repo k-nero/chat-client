@@ -12,6 +12,13 @@ function Chat(props)
     const [chatList, setChatList] = useState([]);
 
     useEffect(() => {
+        if(userInfo.username !== undefined)
+        {
+            props.socket.emit('online', { username: userInfo.username });
+        }
+    }, [userInfo, props.socket]);
+
+    useEffect(() => {
         props.socket.on('message', (data) => {
             if(data.chat === chatId)
             {

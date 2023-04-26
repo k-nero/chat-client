@@ -2,6 +2,7 @@ import {Avatar, Dropdown, Input} from "antd";
 import algoliasearch from "algoliasearch";
 import {useState} from "react";
 import useToken from "../Utils/useToken";
+import {useNavigate} from "react-router-dom";
 
 const searchClient = algoliasearch("M1EN8PC9TO", "94c586c101ccfa7a0ef0a462b990cb6d");
 const index = searchClient.initIndex('Chat-User');
@@ -10,6 +11,7 @@ function SearchBar()
 {
     const [searchResult, setSearchResult] = useState([]);
     const {token} = useToken();
+    const navigate = useNavigate();
     async function createChat(users)
     {
         try
@@ -28,7 +30,7 @@ function SearchBar()
             let data = await res.json();
             if(data)
             {
-                console.log(data);
+                navigate('/chat/' + data.data._id);
             }
         }
         catch (e)
@@ -55,10 +57,7 @@ function SearchBar()
                 setSearchResult([]);
                 return;
             }
-            res = await index.search(k,
-                {
-                    restrictSearchableAttributes: ['username']
-                });
+            res = await index.search(k, { restrictSearchableAttributes: ['username'] });
         }
         else
         {
@@ -77,7 +76,7 @@ function SearchBar()
                     </div>
                 ),
                 onClick: () => {
-                   createChat(res.hits[i].username).then();
+                   createChat(res.hits[i].username).then(() => {event.target.value = ''});
                 }
             }
             records.push(item);

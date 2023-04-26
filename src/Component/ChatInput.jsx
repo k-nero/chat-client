@@ -9,21 +9,28 @@ function ChatInput(props)
     const {token} = useToken();
     async function sendMessage()
     {
-        const res = await fetch('https://localhost:5000/api/message/new-message/' + props.chatId, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token,
-            },
-            body: JSON.stringify({
-                content: message,
-            }),
-        });
-        const data = await res.json();
-        if(data)
-        {
-            //console.log(data);
-        }
+       try
+       {
+           const res = await fetch('https://localhost:5000/api/message/new-message/' + props.chatId, {
+               method: 'POST',
+               headers: {
+                   'Content-Type': 'application/json',
+                   'Authorization': 'Bearer ' + token,
+               },
+               body: JSON.stringify({
+                   content: message,
+               }),
+           });
+           const data = await res.json();
+           if(data)
+           {
+               //console.log(data);
+           }
+       }
+       catch (e)
+       {
+           console.log(e);
+       }
     }
 
     function handleChange(e)
