@@ -21,9 +21,6 @@ Realtime chat client is a part of the project Realtime chat app
 - ReactJS to build up the front-end
 - ExpressJS to create RESTful API
 - MongoDB database to store data
-<div align="center">
-    <img src="./res/app-stack.png" alt="app-stack"/>
-</div>
 
 ## Tech Stack
 <!-- Front-end -->
@@ -31,6 +28,7 @@ Realtime chat client is a part of the project Realtime chat app
   <a href="https://react.dev/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/></a> 
   <a href="https://reactrouter.com" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white"/></a> 
   <a href="https://ant.design" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/-AntDesign-%230170FE?style=for-the-badge&logo=ant-design&logoColor=white"/></a>
+  <a href="https://ant.design" target="blank" rel="noreferrer"><img src="https://img.shields.io/static/v1?style=for-the-badge&message=Algolia&color=5468FF&logo=Algolia&logoColor=FFFFFF&label="/></a>
 </div>
 <!-- Back-end -->
 <div align="center">
@@ -38,7 +36,7 @@ Realtime chat client is a part of the project Realtime chat app
   <a href="https://nodejs.org" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white"/></a>
   <a href="https://expressjs.com" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB"/></a>
   <a href="https://jwt.io" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens"/></a>
-<a href="https://www.npmjs.com" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white"/></a>
+<a href="https://www.algolia.com/" target="blank" rel="noreferrer"><img src="https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white"/></a>
 </div>
 
 <!-- Database -->
